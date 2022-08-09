@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 import javalotto.javalotto.Error;
-import javalotto.javalotto.ErrorMessage;
 import javalotto.javalotto.lotto.Lotto;
 
 public class GameInput {
@@ -113,9 +112,9 @@ public class GameInput {
   }
 
   private void winningLottoDuplicateCheck(String[] lottoNumbers) throws Exception {
-    Set<Integer> set = new HashSet<>();
+    Set<String> set = new HashSet<>();
     for (String number : lottoNumbers) {
-      set.add(Integer.parseInt(number));
+      set.add(number);
     }
     if (set.size() != lottoNumbers.length) {
       throw new Exception(CANNOT_DUPLICATED.getMessage());
