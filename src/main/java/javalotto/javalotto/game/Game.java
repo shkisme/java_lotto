@@ -1,7 +1,7 @@
 package javalotto.javalotto.game;
 
-import static javalotto.javalotto.ErrorMessage.ERROR;
-import static javalotto.javalotto.ErrorMessage.NO_ERROR;
+import static javalotto.javalotto.Error.ERROR;
+import static javalotto.javalotto.Error.NO_ERROR;
 import static javalotto.javalotto.Rank.FIVE_AND_BONUSBALL_MATCH;
 import static javalotto.javalotto.Rank.FIVE_MATCHES;
 import static javalotto.javalotto.Rank.FOUR_MATCHES;
@@ -14,7 +14,7 @@ import static javalotto.javalotto.game.GameMessage.WINNING_STATISTICS;
 import static javalotto.javalotto.lotto.LottoInformation.ONE_LOTTO_PRICE;
 
 import java.util.Collections;
-import javalotto.javalotto.ErrorMessage;
+import javalotto.javalotto.Error;
 import javalotto.javalotto.Rank;
 import javalotto.javalotto.User;
 import javalotto.javalotto.lotto.WinningLotto;
@@ -40,7 +40,7 @@ public class Game {
     saveWinningLotto(lastWeekWinningLotto, bonusBall);
   }
 
-  private ErrorMessage purchaseLotto() {
+  private Error purchaseLotto() {
     try {
       System.out.println(INPUT_MONEY.getMessage());
       user.saveAmount(gameInput.inputAmount());
@@ -65,7 +65,7 @@ public class Game {
     }
   }
 
-  private ErrorMessage inputWinningLotto() { // 사용자에게 당첨 로또 input 받음
+  private Error inputWinningLotto() { // 사용자에게 당첨 로또 input 받음
     Lotto lotto;
     try {
       System.out.println(INPUT_WINNING_LOTTO.getMessage());
@@ -78,7 +78,7 @@ public class Game {
     return NO_ERROR;
   }
 
-  private ErrorMessage inputBonusBall() {
+  private Error inputBonusBall() {
     int bonusBall = 0;
     try {
       System.out.println(INPUT_BONUS_BALL.getMessage());

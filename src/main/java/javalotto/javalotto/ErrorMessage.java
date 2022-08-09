@@ -1,8 +1,6 @@
 package javalotto.javalotto;
 
 public enum ErrorMessage {
-  ERROR(true),
-  NO_ERROR(false),
   AMOUNT_OUT_OF_RANGE("64비트 정수입력 범위를 벗어났습니다."),
   CANNOT_NEGATIVE("돈은 음수가 될 수 없습니다."),
   LACK_MONNEY("구매할 돈이 부족합니다."),
@@ -15,14 +13,9 @@ public enum ErrorMessage {
   INPUT_TEXT_TO_BONUS_BALL("32비트 정수입력 범위를 벗어났습니다.");
 
   private String message;
-  private boolean error;
 
   ErrorMessage(String message) {
     this.message = message;
-  }
-
-  ErrorMessage(boolean error) {
-    this.error = error;
   }
 
   public String getMessage() {

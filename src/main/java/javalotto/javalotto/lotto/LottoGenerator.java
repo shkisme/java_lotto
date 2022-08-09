@@ -1,15 +1,16 @@
 package javalotto.javalotto.lotto;
 
+import javalotto.javalotto.Error;
 import javalotto.javalotto.ErrorMessage;
 
 import java.util.*;
 import javalotto.javalotto.User;
 
+import static javalotto.javalotto.Error.ERROR;
+import static javalotto.javalotto.Error.NO_ERROR;
 import static javalotto.javalotto.ErrorMessage.CANNOT_DUPLICATED;
-import static javalotto.javalotto.ErrorMessage.ERROR;
 import static javalotto.javalotto.ErrorMessage.LOTTO_OUT_OF_RANGE;
 import static javalotto.javalotto.ErrorMessage.NOT_SIX_NUMBERS;
-import static javalotto.javalotto.ErrorMessage.NO_ERROR;
 import static javalotto.javalotto.lotto.LottoInformation.*;
 
 public class LottoGenerator {
@@ -20,7 +21,6 @@ public class LottoGenerator {
   public LottoGenerator(User user) {
     this.user = user;
   }
-  //LottoRepository lottoRepository = new LottoRepository();
 
   public void lottoGeneratetor() {
     Lotto lotto = generateLotto();
@@ -57,14 +57,14 @@ public class LottoGenerator {
     }
   }
 
-  private ErrorMessage lottoSizeCheck(Lotto lotto) {
+  private Error lottoSizeCheck(Lotto lotto) {
     if (lotto.getLottoSize() != LOTTO_LIST_SIZE) {
       return ERROR;
     }
     return NO_ERROR;
   }
 
-  private ErrorMessage lottoNumberDuplicateCheck(Lotto lotto) {
+  private Error lottoNumberDuplicateCheck(Lotto lotto) {
     Set<Integer> set = new HashSet<>(lotto.getLotto());
     if (set.size() != lotto.getLottoSize()) {
       return ERROR;
@@ -72,8 +72,8 @@ public class LottoGenerator {
     return NO_ERROR;
   }
 
-  private ErrorMessage lottoNumberRangeCheck(Lotto lotto) {
-    List<ErrorMessage> error = new ArrayList<>();
+  private Error lottoNumberRangeCheck(Lotto lotto) {
+    List<Error> error = new ArrayList<>();
     for (int number : lotto.getLotto()) {
       error.add(numberRangeCheck(number));
     }
@@ -83,8 +83,8 @@ public class LottoGenerator {
     return NO_ERROR;
   }
 
-  private ErrorMessage numberRangeCheck(int number) {
-    ErrorMessage error = NO_ERROR;
+  private Error numberRangeCheck(int number) {
+    Error error = NO_ERROR;
     if (number < LOTTO_MIN_VALUE || number > LOTTO_MAX_VALUE) {
       error = ERROR;
     }

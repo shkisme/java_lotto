@@ -11,7 +11,6 @@ public class GamePrint {
     this.user = user;
   }
 
-  //LottoRepository lottoRepository = new LottoRepository();
   public void printLottoList(int lottoTicket) {
     System.out.printf("%d개를 구매했습니다.\n", lottoTicket);
     for (Lotto lotto : user.getLottoList()) {

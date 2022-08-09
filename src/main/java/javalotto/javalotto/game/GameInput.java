@@ -1,17 +1,17 @@
 package javalotto.javalotto.game;
 
+import static javalotto.javalotto.Error.ERROR;
+import static javalotto.javalotto.Error.NO_ERROR;
 import static javalotto.javalotto.ErrorMessage.BONUS_BALL_OUT_OF_RANGE;
 import static javalotto.javalotto.ErrorMessage.CANNOT_DUPLICATED;
 import static javalotto.javalotto.ErrorMessage.CANNOT_NEGATIVE;
 import static javalotto.javalotto.ErrorMessage.DUPLICATED_WITH_WINNING_LOTTO;
-import static javalotto.javalotto.ErrorMessage.ERROR;
 import static javalotto.javalotto.ErrorMessage.INPUT_TEXT_TO_BONUS_BALL;
 import static javalotto.javalotto.ErrorMessage.INPUT_TEXT_TO_LOTTO;
 import static javalotto.javalotto.ErrorMessage.LACK_MONNEY;
 import static javalotto.javalotto.ErrorMessage.AMOUNT_OUT_OF_RANGE;
 import static javalotto.javalotto.ErrorMessage.LOTTO_OUT_OF_RANGE;
 import static javalotto.javalotto.ErrorMessage.NOT_SIX_NUMBERS;
-import static javalotto.javalotto.ErrorMessage.NO_ERROR;
 import static javalotto.javalotto.lotto.LottoInformation.LOTTO_LIST_SIZE;
 import static javalotto.javalotto.lotto.LottoInformation.LOTTO_MAX_VALUE;
 import static javalotto.javalotto.lotto.LottoInformation.LOTTO_MIN_VALUE;
@@ -22,6 +22,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
+import javalotto.javalotto.Error;
 import javalotto.javalotto.ErrorMessage;
 import javalotto.javalotto.lotto.Lotto;
 
@@ -122,7 +123,7 @@ public class GameInput {
   }
 
   private void winningLottoNotNumberCheck(String[] lottoNumbers) throws Exception {
-    List<ErrorMessage> error = new ArrayList<>();
+    List<Error> error = new ArrayList<>();
     for (String number : lottoNumbers) {
       error.add(textCheck(number));
     }
@@ -131,7 +132,7 @@ public class GameInput {
     }
   }
 
-  private ErrorMessage textCheck(String number) {
+  private Error textCheck(String number) {
     int num = 0;
     try {
       num = Integer.parseInt(number);
@@ -142,7 +143,7 @@ public class GameInput {
   }
 
   private void winningLottoRangeCheck(String[] lottoNumbers) throws Exception {
-    List<ErrorMessage> error = new ArrayList<>();
+    List<Error> error = new ArrayList<>();
     for (String number : lottoNumbers) {
       error.add(numberRangeCheck(Integer.parseInt(number)));
     }
@@ -151,8 +152,8 @@ public class GameInput {
     }
   }
 
-  private ErrorMessage numberRangeCheck(int number) {
-    ErrorMessage error = NO_ERROR;
+  private Error numberRangeCheck(int number) {
+    Error error = NO_ERROR;
     if (number < LOTTO_MIN_VALUE || number > LOTTO_MAX_VALUE) {
       error = ERROR;
     }
@@ -197,7 +198,7 @@ public class GameInput {
   }
 
   private void bonusBallDuplicateCheck(Lotto lotto, int ball) throws Exception {
-    List<ErrorMessage> error = new ArrayList<>();
+    List<Error> error = new ArrayList<>();
     for (int number : lotto.getLotto()) {
       error.add(compareBallAndNumber(number, ball));
     }
@@ -206,7 +207,7 @@ public class GameInput {
     }
   }
 
-  private ErrorMessage compareBallAndNumber(int number, int ball) {
+  private Error compareBallAndNumber(int number, int ball) {
     if (number == ball) {
       return ERROR;
     }
