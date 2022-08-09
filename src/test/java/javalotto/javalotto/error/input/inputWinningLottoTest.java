@@ -8,7 +8,6 @@ import static javalotto.javalotto.ErrorMessage.NOT_SIX_NUMBERS;
 import java.io.ByteArrayInputStream;
 import java.util.Scanner;
 import javalotto.javalotto.game.GameInput;
-import javalotto.javalotto.lotto.Lotto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

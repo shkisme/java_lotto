@@ -22,6 +22,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import javalotto.javalotto.Error;
 import javalotto.javalotto.lotto.Lotto;
 
@@ -73,57 +75,55 @@ public class GameInput {
   public Lotto winningLotto() throws Exception {
     String winningLottoNumber = scanner.next();
     try {
-      winningLottoErrorCheck(extractNumbers(winningLottoNumber));
+      winningLottoErrorCheck(winningLottoNumber);
     } catch (Exception e) {
       throw e;
     }
-    Lotto winningLotto = getWinningLotto(extractNumbers(winningLottoNumber));
+    Lotto winningLotto = getWinningLotto(winningLottoNumber);
     return winningLotto;
   }
 
-  private Lotto getWinningLotto(String[] winningLottoNumber) {
-    List<Integer> winningLotto = new ArrayList<>();
-    for (String number : winningLottoNumber) {
-      winningLotto.add(Integer.parseInt(number));
-    }
-    return new Lotto(winningLotto);
+  private Lotto getWinningLotto(String winningLottoNumber) {
+    List<Integer> winningLottoNumberList = Pattern.compile(",").splitAsStream(winningLottoNumber)
+        .collect(Collectors.toList())
+        .stream()
+        .map(string -> Integer.parseInt(string))
+        .collect(Collectors.toList());
+    return new Lotto(winningLottoNumberList);
   }
 
-  private String[] extractNumbers(String winningLottoNumber) {
-    String[] lottoNumbers = winningLottoNumber.split(",");
-    return lottoNumbers;
-  }
-
-  private void winningLottoErrorCheck(String[] lottoNumbers) throws Exception {
+  private void winningLottoErrorCheck(String lottoNumbers) throws Exception {
+    List<String> lottoNumberList = Pattern.compile(",").splitAsStream(lottoNumbers)
+        .collect(Collectors.toList());
     try {
-      winningLottoSizeCheck(lottoNumbers);
-      winningLottoNotNumberCheck(lottoNumbers);
-      winningLottoDuplicateCheck(lottoNumbers);
-      winningLottoRangeCheck(lottoNumbers);
+      winningLottoSizeCheck(lottoNumberList);
+      winningLottoNotNumberCheck(lottoNumberList);
+      winningLottoDuplicateCheck(lottoNumberList);
+      winningLottoRangeCheck(lottoNumberList);
     } catch (Exception e) {
       throw e;
     }
   }
 
-  private void winningLottoSizeCheck(String[] lottoNumbers) throws Exception {
-    if (lottoNumbers.length != LOTTO_LIST_SIZE) {
+  private void winningLottoSizeCheck(List<String> lottoNumberList) throws Exception {
+    if (lottoNumberList.size() != LOTTO_LIST_SIZE) {
       throw new Exception(NOT_SIX_NUMBERS.getMessage());
     }
   }
 
-  private void winningLottoDuplicateCheck(String[] lottoNumbers) throws Exception {
+  private void winningLottoDuplicateCheck(List<String> lottoNumberList) throws Exception {
     Set<String> set = new HashSet<>();
-    for (String number : lottoNumbers) {
+    for (String number : lottoNumberList) {
       set.add(number);
     }
-    if (set.size() != lottoNumbers.length) {
+    if (set.size() != lottoNumberList.size()) {
       throw new Exception(CANNOT_DUPLICATED.getMessage());
     }
   }
 
-  private void winningLottoNotNumberCheck(String[] lottoNumbers) throws Exception {
+  private void winningLottoNotNumberCheck(List<String> lottoNumberList) throws Exception {
     List<Error> error = new ArrayList<>();
-    for (String number : lottoNumbers) {
+    for (String number : lottoNumberList) {
       error.add(textCheck(number));
     }
     if (error.contains(ERROR)) {
@@ -141,9 +141,9 @@ public class GameInput {
     return NO_ERROR;
   }
 
-  private void winningLottoRangeCheck(String[] lottoNumbers) throws Exception {
+  private void winningLottoRangeCheck(List<String> lottoNumberList) throws Exception {
     List<Error> error = new ArrayList<>();
-    for (String number : lottoNumbers) {
+    for (String number : lottoNumberList) {
       error.add(numberRangeCheck(Integer.parseInt(number)));
     }
     if (error.contains(ERROR)) {
