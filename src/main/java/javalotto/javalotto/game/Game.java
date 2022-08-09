@@ -28,7 +28,7 @@ public class Game {
   private final GamePrint gamePrint = new GamePrint(user);
   public WinningLotto winningLotto;
   private Lotto lastWeekWinningLotto;
-  private int bonusBall;
+  private int lastWeekBonusBall;
 
   public void input() { // 사용자에게 input 받음
     while (purchaseLotto() == ERROR)
@@ -37,7 +37,7 @@ public class Game {
       ;
     while (inputBonusBall() == ERROR)
       ;
-    saveWinningLotto(lastWeekWinningLotto, bonusBall);
+    saveWinningLotto(lastWeekWinningLotto, lastWeekBonusBall);
   }
 
   private Error purchaseLotto() {
@@ -96,7 +96,7 @@ public class Game {
   }
 
   private void saveBonusBall(int ball) {
-    bonusBall = ball;
+    lastWeekBonusBall = ball;
   }
 
   private void saveWinningLotto(Lotto lotto, int bonusNo) {
