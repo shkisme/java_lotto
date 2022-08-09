@@ -19,6 +19,7 @@ import static javalotto.javalotto.lotto.LottoInformation.ONE_LOTTO_PRICE;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
@@ -35,8 +36,8 @@ public class GameInput {
     long amount = 0L;
     try {
       amount = scanner.nextLong();
-    } catch (Exception e) {
-      e = new Exception(AMOUNT_OUT_OF_RANGE.getMessage());
+    } catch (InputMismatchException inputMismatchException) {
+      Exception e = new Exception(AMOUNT_OUT_OF_RANGE.getMessage());
       scanner = new Scanner(System.in);
       throw e;
     }
