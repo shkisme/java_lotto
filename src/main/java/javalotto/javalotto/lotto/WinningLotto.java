@@ -8,7 +8,6 @@ import static javalotto.javalotto.Rank.SIX_MATCHES;
 import static javalotto.javalotto.Rank.THREE_MATCHES;
 
 import javalotto.javalotto.Rank;
-import javalotto.javalotto.lotto.Lotto;
 
 /**
  * 당첨 번호를 담당하는 객체

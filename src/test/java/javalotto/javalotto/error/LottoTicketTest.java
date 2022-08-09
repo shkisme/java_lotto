@@ -1,13 +1,10 @@
 package javalotto.javalotto.error;
 
-import static javalotto.javalotto.lotto.LottoInformation.ONE_LOTTO_PRICE;
-
 import java.io.ByteArrayInputStream;
 import java.util.Scanner;
 import javalotto.javalotto.User;
 import javalotto.javalotto.game.Game;
 import javalotto.javalotto.game.GameInput;
-import javalotto.javalotto.lotto.LottoGenerator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

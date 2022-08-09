@@ -1,10 +1,8 @@
 package javalotto.javalotto.lotto;
 
 import javalotto.javalotto.Error;
-import javalotto.javalotto.ErrorMessage;
 
 import java.util.*;
-import javalotto.javalotto.User;
 
 import static javalotto.javalotto.Error.ERROR;
 import static javalotto.javalotto.Error.NO_ERROR;
@@ -51,8 +49,10 @@ public class LottoGenerator {
     if (lottoNumberDuplicateCheck(lotto) == ERROR) {
       throw new Exception(CANNOT_DUPLICATED.getMessage());
     }
-    if (lottoNumberRangeCheck(lotto) == ERROR) {
-      throw new Exception(LOTTO_OUT_OF_RANGE.getMessage());
+    try {
+      lottoNumberRangeCheck(lotto);
+    } catch (Exception e) {
+      throw e;
     }
   }
 
@@ -71,22 +71,19 @@ public class LottoGenerator {
     return NO_ERROR;
   }
 
-  private Error lottoNumberRangeCheck(Lotto lotto) {
-    List<Error> error = new ArrayList<>();
-    for (int number : lotto.getLottoNumberList()) {
-      error.add(numberRangeCheck(number));
-    }
-    if (error.contains(ERROR)) {
-      return ERROR;
-    }
-    return NO_ERROR;
+  private void lottoNumberRangeCheck(Lotto lotto) {
+    lotto.getLottoNumberList().forEach(number -> {
+      try {
+        numberRangeCheck(number);
+      } catch (Exception e) {
+        throw new RuntimeException(e);
+      }
+    });
   }
 
-  private Error numberRangeCheck(int number) {
-    Error error = NO_ERROR;
+  private void numberRangeCheck(int number) throws Exception {
     if (number < LOTTO_MIN_VALUE || number > LOTTO_MAX_VALUE) {
-      error = ERROR;
+      throw new Exception(LOTTO_OUT_OF_RANGE.getMessage());
     }
-    return error;
   }
 }

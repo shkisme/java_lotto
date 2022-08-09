@@ -18,6 +18,7 @@ import static javalotto.javalotto.lotto.LottoInformation.LOTTO_MIN_VALUE;
 import static javalotto.javalotto.lotto.LottoInformation.ONE_LOTTO_PRICE;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -122,42 +123,39 @@ public class GameInput {
     }
   }
 
-  private void winningLottoNotNumberCheck(List<String> lottoNumberList) throws Exception {
-    List<Error> error = new ArrayList<>();
-    for (String number : lottoNumberList) {
-      error.add(textCheck(number));
-    }
-    if (error.contains(ERROR)) {
-      throw new Exception(INPUT_TEXT_TO_LOTTO.getMessage());
-    }
+  private void winningLottoNotNumberCheck(List<String> lottoNumberList) {
+    lottoNumberList.forEach(number -> {
+      try {
+        textCheck(number);
+      } catch (Exception e) {
+        throw new RuntimeException(e);
+      }
+    });
   }
 
-  private Error textCheck(String number) {
+  private void textCheck(String number) throws Exception {
     int num = 0;
     try {
       num = Integer.parseInt(number);
     } catch (NumberFormatException e) {
-      return ERROR;
+      throw new Exception(INPUT_TEXT_TO_LOTTO.getMessage());
     }
-    return NO_ERROR;
   }
 
-  private void winningLottoRangeCheck(List<String> lottoNumberList) throws Exception {
-    List<Error> error = new ArrayList<>();
-    for (String number : lottoNumberList) {
-      error.add(numberRangeCheck(Integer.parseInt(number)));
-    }
-    if (error.contains(ERROR)) {
+  private void winningLottoRangeCheck(List<String> lottoNumberList) {
+    lottoNumberList.forEach(number -> {
+      try {
+        numberRangeCheck(Integer.parseInt(number));
+      } catch (Exception e) {
+        throw new RuntimeException(e);
+      }
+    });
+  }
+
+  private void numberRangeCheck(int number) throws Exception {
+    if (number < LOTTO_MIN_VALUE || number > LOTTO_MAX_VALUE) {
       throw new Exception(LOTTO_OUT_OF_RANGE.getMessage());
     }
-  }
-
-  private Error numberRangeCheck(int number) {
-    Error error = NO_ERROR;
-    if (number < LOTTO_MIN_VALUE || number > LOTTO_MAX_VALUE) {
-      error = ERROR;
-    }
-    return error;
   }
 
   public int bonusBall(Lotto lotto) throws Exception {
@@ -197,20 +195,19 @@ public class GameInput {
     }
   }
 
-  private void bonusBallDuplicateCheck(Lotto lotto, int ball) throws Exception {
-    List<Error> error = new ArrayList<>();
-    for (int number : lotto.getLottoNumberList()) {
-      error.add(isBonusBallAndNumberMatch(number, ball));
-    }
-    if (error.contains(ERROR)) {
-      throw new Exception(DUPLICATED_WITH_WINNING_LOTTO.getMessage());
-    }
+  private void bonusBallDuplicateCheck(Lotto lotto, int ball) {
+    lotto.getLottoNumberList().forEach(number -> {
+      try {
+        isBonusBallAndNumberMatch(number, ball);
+      } catch (Exception e) {
+        throw new RuntimeException(e);
+      }
+    });
   }
 
-  private Error isBonusBallAndNumberMatch(int number, int ball) {
+  private void isBonusBallAndNumberMatch(int number, int ball) throws Exception {
     if (number == ball) {
-      return ERROR;
+      throw new Exception(DUPLICATED_WITH_WINNING_LOTTO.getMessage());
     }
-    return NO_ERROR;
   }
 }
