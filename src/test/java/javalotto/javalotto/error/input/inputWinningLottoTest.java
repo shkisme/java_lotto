@@ -1,6 +1,5 @@
 package javalotto.javalotto.error.input;
 
-import static javalotto.javalotto.ErrorMessage.AMOUNT_OUT_OF_RANGE;
 import static javalotto.javalotto.ErrorMessage.CANNOT_DUPLICATED;
 import static javalotto.javalotto.ErrorMessage.INPUT_TEXT_TO_LOTTO;
 import static javalotto.javalotto.ErrorMessage.LOTTO_OUT_OF_RANGE;
@@ -8,13 +7,23 @@ import static javalotto.javalotto.ErrorMessage.NOT_SIX_NUMBERS;
 
 import java.io.ByteArrayInputStream;
 import java.util.Scanner;
-import javalotto.javalotto.game.Game;
 import javalotto.javalotto.game.GameInput;
+import javalotto.javalotto.lotto.Lotto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class inputWinningLottoTest {
+
+  @Test
+  @DisplayName("정상적인 값 입력")
+  public void CorrectInput() {
+    GameInput gameInput = new GameInput();
+    setSystemInput("1,2,3,4,5,6");
+    Assertions.assertThatCode(() -> {
+      gameInput.winningLotto();
+    }).doesNotThrowAnyException();
+  }
 
   @Test
   @DisplayName("6개 숫자가 아닌 입력")

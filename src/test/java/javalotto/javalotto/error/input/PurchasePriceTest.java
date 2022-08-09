@@ -16,6 +16,16 @@ public class PurchasePriceTest {
   public Scanner scanner = new Scanner(System.in);
 
   @Test
+  @DisplayName("정상적인 값 입력")
+  public void CorrectInput() {
+    GameInput gameInput = new GameInput();
+    setSystemInput("8000");
+    Assertions.assertThatCode(() -> {
+      gameInput.inputAmount();
+    }).doesNotThrowAnyException();
+  }
+
+  @Test
   @DisplayName("구입 금액에 문자 입력")
   public void InputTextAmount() {
     GameInput gameInput = new GameInput();

@@ -3,11 +3,9 @@ package javalotto.javalotto.error.input;
 import static javalotto.javalotto.ErrorMessage.BONUS_BALL_OUT_OF_RANGE;
 import static javalotto.javalotto.ErrorMessage.DUPLICATED_WITH_WINNING_LOTTO;
 import static javalotto.javalotto.ErrorMessage.INPUT_TEXT_TO_BONUS_BALL;
-import static javalotto.javalotto.ErrorMessage.INPUT_TEXT_TO_LOTTO;
 
 import java.io.ByteArrayInputStream;
 import java.util.Scanner;
-import javalotto.javalotto.game.Game;
 import javalotto.javalotto.game.GameInput;
 import javalotto.javalotto.lotto.Lotto;
 import org.assertj.core.api.Assertions;
@@ -15,6 +13,17 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class inputBonusBallTest {
+
+  @Test
+  @DisplayName("정상적인 값 입력")
+  public void CorrectInput() {
+    GameInput gameInput = new GameInput();
+    setSystemInput("1,2,3,4,5,6\n20\n");
+    Assertions.assertThatCode(() -> {
+      Lotto lotto = gameInput.winningLotto();
+      gameInput.bonusBall(lotto);
+    }).doesNotThrowAnyException();
+  }
 
   @Test
   @DisplayName("숫자 범위를 벗어난 보너스 볼 입력")
