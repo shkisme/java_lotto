@@ -199,14 +199,14 @@ public class GameInput {
   private void bonusBallDuplicateCheck(Lotto lotto, int ball) throws Exception {
     List<Error> error = new ArrayList<>();
     for (int number : lotto.getLotto()) {
-      error.add(compareBallAndNumber(number, ball));
+      error.add(isBonusBallAndNumberMatch(number, ball));
     }
     if (error.contains(ERROR)) {
       throw new Exception(DUPLICATED_WITH_WINNING_LOTTO.getMessage());
     }
   }
 
-  private Error compareBallAndNumber(int number, int ball) {
+  private Error isBonusBallAndNumberMatch(int number, int ball) {
     if (number == ball) {
       return ERROR;
     }
