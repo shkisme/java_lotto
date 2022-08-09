@@ -22,7 +22,7 @@ public class LottoGenerator {
     this.user = user;
   }
 
-  public void lottoGeneratetor() {
+  public void lottoGenerator() {
     Lotto lotto = generateLotto();
     try {
       errorCheck(lotto);

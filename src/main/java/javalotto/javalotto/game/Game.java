@@ -61,7 +61,7 @@ public class Game {
   private void generateLotto(int lottoTicket) {
     for (int i = 0; i < lottoTicket; i++) {
       LottoGenerator lotto = new LottoGenerator(user);
-      lotto.lottoGeneratetor();
+      lotto.lottoGenerator();
     }
   }
 
