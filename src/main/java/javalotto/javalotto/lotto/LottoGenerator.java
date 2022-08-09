@@ -16,23 +16,22 @@ import static javalotto.javalotto.lotto.LottoInformation.*;
 public class LottoGenerator {
 
   private final Random random = new Random();
-  private final User user;
+  private static LottoGenerator lottoGenerator;
 
-  public LottoGenerator(User user) {
-    this.user = user;
+  public LottoGenerator() {
   }
 
-  public void lottoGenerator() {
-    Lotto lotto = generateLotto();
+  public static LottoGenerator newLottoGenerator() {
+    lottoGenerator = new LottoGenerator();
+    return lottoGenerator;
+  }
+
+  public Lotto generateLotto() {
+    Lotto lotto = new Lotto(generateRandomNumberList());
     try {
       errorCheck(lotto);
     } catch (Exception e) {
     }
-    saveUserLotto(lotto);
-  }
-
-  private Lotto generateLotto() {
-    Lotto lotto = new Lotto(generateRandomNumberList());
     return lotto;
   }
 
@@ -89,9 +88,5 @@ public class LottoGenerator {
       error = ERROR;
     }
     return error;
-  }
-
-  private void saveUserLotto(Lotto lotto) {
-    user.saveLotto(lotto);
   }
 }
