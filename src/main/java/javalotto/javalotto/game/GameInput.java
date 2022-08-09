@@ -74,11 +74,11 @@ public class GameInput {
   public Lotto winningLotto() throws Exception {
     String winningLottoNumber = scanner.next();
     try {
-      winningLottoErrorCheck(extrackNumbers(winningLottoNumber));
+      winningLottoErrorCheck(extractNumbers(winningLottoNumber));
     } catch (Exception e) {
       throw e;
     }
-    Lotto winningLotto = getWinningLotto(extrackNumbers(winningLottoNumber));
+    Lotto winningLotto = getWinningLotto(extractNumbers(winningLottoNumber));
     return winningLotto;
   }
 
@@ -90,7 +90,7 @@ public class GameInput {
     return new Lotto(winningLotto);
   }
 
-  private String[] extrackNumbers(String winningLottoNumber) {
+  private String[] extractNumbers(String winningLottoNumber) {
     String[] lottoNumbers = winningLottoNumber.split(",");
     return lottoNumbers;
   }
