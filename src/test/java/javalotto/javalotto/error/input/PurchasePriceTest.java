@@ -1,7 +1,7 @@
 package javalotto.javalotto.error.input;
 
 import static javalotto.javalotto.ErrorMessage.CANNOT_NEGATIVE;
-import static javalotto.javalotto.ErrorMessage.LACK_MONNEY;
+import static javalotto.javalotto.ErrorMessage.LACK_MONEY;
 import static javalotto.javalotto.ErrorMessage.AMOUNT_OUT_OF_RANGE;
 
 import java.io.ByteArrayInputStream;
@@ -60,7 +60,7 @@ public class PurchasePriceTest {
           gameInput.inputAmount();
         })
         .isInstanceOf(Exception.class)
-        .hasMessageContaining(LACK_MONNEY.getMessage());
+        .hasMessageContaining(LACK_MONEY.getMessage());
   }
 
   @Test
