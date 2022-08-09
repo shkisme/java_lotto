@@ -198,7 +198,7 @@ public class GameInput {
 
   private void bonusBallDuplicateCheck(Lotto lotto, int ball) throws Exception {
     List<Error> error = new ArrayList<>();
-    for (int number : lotto.getLotto()) {
+    for (int number : lotto.getLottoNumberList()) {
       error.add(isBonusBallAndNumberMatch(number, ball));
     }
     if (error.contains(ERROR)) {

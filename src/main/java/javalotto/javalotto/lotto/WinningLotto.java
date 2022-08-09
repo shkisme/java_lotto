@@ -43,8 +43,8 @@ public class WinningLotto {
 
   private int countMatch(Lotto userLotto) {
     int count = 0;
-    for (int number : lotto.getLotto()) {
-      if (userLotto.getLotto().contains(number)) {
+    for (int number : lotto.getLottoNumberList()) {
+      if (userLotto.getLottoNumberList().contains(number)) {
         count++;
       }
     }
@@ -52,10 +52,10 @@ public class WinningLotto {
   }
 
   private Rank bonusBallCheck(Lotto userLotto) {
-    if (userLotto.getLotto().contains(bonusNo)) {
+    if (userLotto.getLottoNumberList().contains(bonusNo)) {
       return FIVE_AND_BONUSBALL_MATCH;
     }
-    if (!userLotto.getLotto().contains(bonusNo)) {
+    if (!userLotto.getLottoNumberList().contains(bonusNo)) {
       return FIVE_MATCHES;
     }
     return null;

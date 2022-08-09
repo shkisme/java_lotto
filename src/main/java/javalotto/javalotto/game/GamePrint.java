@@ -29,7 +29,7 @@ public class GamePrint {
 
   private String lottoNumbers(Lotto lotto) {
     String lottoNumbers = "";
-    for (int number : lotto.getLotto()) {
+    for (int number : lotto.getLottoNumberList()) {
       lottoNumbers += number;
       lottoNumbers += ", ";
     }

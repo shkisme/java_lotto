@@ -64,7 +64,7 @@ public class LottoGenerator {
   }
 
   private Error lottoNumberDuplicateCheck(Lotto lotto) {
-    Set<Integer> set = new HashSet<>(lotto.getLotto());
+    Set<Integer> set = new HashSet<>(lotto.getLottoNumberList());
     if (set.size() != lotto.getLottoSize()) {
       return ERROR;
     }
@@ -73,7 +73,7 @@ public class LottoGenerator {
 
   private Error lottoNumberRangeCheck(Lotto lotto) {
     List<Error> error = new ArrayList<>();
-    for (int number : lotto.getLotto()) {
+    for (int number : lotto.getLottoNumberList()) {
       error.add(numberRangeCheck(number));
     }
     if (error.contains(ERROR)) {

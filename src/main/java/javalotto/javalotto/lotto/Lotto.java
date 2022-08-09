@@ -18,7 +18,7 @@ public class Lotto {
     return numbers.size();
   }
 
-  public List<Integer> getLotto() {
+  public List<Integer> getLottoNumberList() {
     return this.numbers;
   }
 }
